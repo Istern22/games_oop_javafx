@@ -10,6 +10,7 @@ import java.util.Optional;
  * //TODO add comments.
  *
  * @author Petr Arsentev (parsentev@yandex.ru)
+ * @author Svetlana Ragulina (alistern22@gmail.com)
  * @version $Id$
  * @since 0.1
  */
@@ -27,6 +28,13 @@ public class Logic {
         if (index != -1) {
             Cell[] steps = this.figures[index].way(source, dest);
             if (steps.length > 0 && steps[steps.length - 1].equals(dest)) {
+                for (int i = 0; i < steps.length; i++) {
+                    for (int j = 0; j < figures.length; j++) {
+                        if(figures[j] != null && steps[i] == figures[j].position()) {
+                            return false;
+                        }
+                    }
+                }
                 rst = true;
                 this.figures[index] = this.figures[index].copy(dest);
             }
